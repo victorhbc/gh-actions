@@ -1,0 +1,33 @@
+name: 'React Vite Build and Test'
+description: 'Clones the repo, installs dependencies, runs tests, and builds the project'
+author: 'Your Name or Organization'
+branding:
+  icon: 'package' # Change the icon if needed (see GitHub's available icons)
+  color: 'blue' # Change the color if needed
+inputs:
+  node-version:
+    description: 'Node.js version to use'
+    required: false
+    default: '18'
+runs:
+  using: 'composite'
+  steps:
+    - name: Clonar o repositório
+      uses: actions/checkout@v4
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Instalar dependências
+      run: npm install
+      shell: bash
+
+    - name: Rodar testes
+      run: npm test
+      shell: bash
+
+    - name: Construir projeto
+      run: npm run build
+      shell: bash
